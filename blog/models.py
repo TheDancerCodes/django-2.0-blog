@@ -9,8 +9,7 @@ class PublishedManager(models.Manager):
 
     def get_queryset(self):
         """The method returns the QuerySet that will be executed."""
-        return super(PublishedManager, self).get_queryset() \
-                                            .filter(status='published')
+        return super(PublishedManager, self).get_queryset().filter(status='published')
 
 
 class Post(models.Model):
@@ -35,6 +34,12 @@ class Post(models.Model):
     objects = models.Manager()  # The default manager.
     published = PublishedManager()  # Our custom manager.
 
+    class Meta:
+        ordering = ('-publish',)
+
+    def __str__(self):
+        return self.title
+
     # Use get_absolute_url() method in our templates to link to specific posts.
     def get_absolute_url(self):
         """Method added to the Model returns the canocial URL of the object."""
@@ -43,9 +48,3 @@ class Post(models.Model):
                              self.publish.month,
                              self.publish.day,
                              self.slug])
-
-    class Meta:
-        ordering = ('-publish',)
-
-    def __str__(self):
-        return self.title

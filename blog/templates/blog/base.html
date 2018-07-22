@@ -1,0 +1,21 @@
+<!--Includes the main HTML structure of the website & divides the
+	content into main content area or sidebar.-->
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<link href="{% static "css/blog.css" %}" rel="stylesheet" type="text/css" >
+</head>
+<body>
+	<div id="content">
+		{% block content %}
+		{% endblock %}
+	</div>
+	<div id="sidebar">
+		<h2>My Blog</h2>
+		   <p>This is my blog</p>
+	</div>
+</body>
+</html>

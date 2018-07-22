@@ -4,7 +4,7 @@ from .models import Post
 
 def post_list(request):
     """A View to display a list of posts."""
-    Post.published.all()
+    posts = Post.published.all()
     return render(request,
                   'blog/post/list.html',
                   {'posts': posts})
