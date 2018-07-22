@@ -1,6 +1,7 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class PublishedManager(models.Manager):
@@ -33,6 +34,15 @@ class Post(models.Model):
                               default='draft')
     objects = models.Manager()  # The default manager.
     published = PublishedManager()  # Our custom manager.
+
+    # Use get_absolute_url() method in our templates to link to specific posts.
+    def get_absolute_url(self):
+        """Method added to the Model returns the canocial URL of the object."""
+        return reverse('blog:post_detail',
+                       args=[self.publish.year,
+                             self.publish.month,
+                             self.publish.day,
+                             self.slug])
 
     class Meta:
         ordering = ('-publish',)
