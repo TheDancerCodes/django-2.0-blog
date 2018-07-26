@@ -68,11 +68,11 @@ def post_share(request, post_id):
             message = 'Read "{}" at {}\n\n{}\'s comments: {}' \
                 .format(post.title, post_url, cd['name'], cd['comments'])
 
-            send_mail(subject, message, '254dance@gmail.com', [cd['to']])
+            send_mail(subject, message, 'your_account@gmail.com', [cd['to']])
 
             sent = True
-        else:
-            form = EmailPostForm()
-        return render(request, 'blog/post/share.html', {'post': post,
-                                                        'form': form,
-                                                        'sent': sent})
+    else:
+        form = EmailPostForm()
+    return render(request, 'blog/post/share.html', {'post': post,
+                                                    'form': form,
+                                                    'sent': sent})
