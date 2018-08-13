@@ -16,6 +16,16 @@
   	</a>
   </p>
 
+<!-- Display the similar posts-->
+  <h2>Similar Posts</h2>
+  {% for post in similar_posts %}
+    <p>
+      <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+    </p>
+    {% empty %}
+        There are no similar posts yet.
+    {% endfor %}
+
   <!-- The `with` template tag is useful to avoid hitting the
     database or accessing expensive methods multiple times. -->
 {% with comments.count as total_comments %}
