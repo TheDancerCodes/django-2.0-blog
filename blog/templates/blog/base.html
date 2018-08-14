@@ -1,6 +1,10 @@
 <!--Includes the main HTML structure of the website & divides the
 	content into main content area or sidebar.-->
 
+<!-- Make custom template tags available to template.
+    Use name of the Python module containing your template tags and filters, `blog_tags`
+    -->
+{% load blog_tags %}
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -15,7 +19,8 @@
 	</div>
 	<div id="sidebar">
 		<h2>My Blog</h2>
-		   <p>This is my blog</p>
+			<!-- Use tag created to display total posts. -->
+		   <p>This is my blog. I've written {% total_posts %} posts so far.</p>
 	</div>
 </body>
 </html>
