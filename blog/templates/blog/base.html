@@ -21,6 +21,10 @@
 		<h2>My Blog</h2>
 			<!-- Use tag created to display total posts. -->
 		   <p>This is my blog. I've written {% total_posts %} posts so far.</p>
+
+		   <!-- New template tag to display the last three posts -->
+		   <h3>Latest posts</h3>
+		   {% show_latest_posts 3 %}
 	</div>
 </body>
 </html>
