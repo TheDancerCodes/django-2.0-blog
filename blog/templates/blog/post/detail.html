@@ -1,5 +1,7 @@
 {% extends "blog/base.html" %}
 
+{% load blog_tags %}
+
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
@@ -7,7 +9,7 @@
   <p class="date">
   	Published {{ post.publish }} by {{ post.author }}
   </p>
-  {{ post.body|linebreaks }}
+  {{ post.body|markdown }}
 
   <!-- Link to share post URL -->
   <p>
