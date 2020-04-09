@@ -1,4 +1,4 @@
-Django==2.1.5
+Django==2.2.10
 django-taggit==1.0.0
 Markdown==2.6.11
 psycopg2-binary==2.8.4
