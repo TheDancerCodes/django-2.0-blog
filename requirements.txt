@@ -1,5 +1,6 @@
 Django==2.1.5
 django-taggit==1.0.0
 Markdown==2.6.11
+psycopg2-binary==2.8.4
 pytz==2019.1
 sqlparse==0.3.0
