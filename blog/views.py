@@ -143,12 +143,13 @@ def post_search(request):
 
             # Search for posts with a custom SearchVector instance built with the title and body fields.
             # Create a SearchQuery object, filter results by it, and use SearchRank to order the results by relevancy.
-            search_vector = SearchVector('title', 'body')
+            search_vector = SearchVector(
+                'title', weight='A') + SearchVector('body', weight='B')
             search_query = SearchQuery(query)
             results = Post.objects.annotate(
                 search=search_vector,
                 rank=SearchRank(search_vector, search_query)
-            ).filter(search=search_query).order_by('-rank')
+            ).filter(rank__gte=0.3).order_by('-rank')
     return render(request,
                   'blog/post/search.html',
                   {'form': form,
