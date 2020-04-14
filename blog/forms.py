@@ -19,3 +19,8 @@ class CommentForm(forms.ModelForm):
 
         model = Comment
         fields = ('name', 'email', 'body')  # List of fields to include in form
+
+
+class SearchForm(forms.Form):
+    # Use the query field to let the users introduce search terms.
+    query = forms.CharField()
