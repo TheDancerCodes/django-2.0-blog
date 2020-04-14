@@ -9,7 +9,7 @@ from .forms import EmailPostForm, CommentForm, SearchForm
 from taggit.models import Tag
 
 from django.db.models import Count
-from django.contrib.postgres.search import SearchVector
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 
 
 def post_list(request, tag_slug=None):
@@ -142,9 +142,13 @@ def post_search(request):
             query = form.cleaned_data['query']
 
             # Search for posts with a custom SearchVector instance built with the title and body fields.
+            # Create a SearchQuery object, filter results by it, and use SearchRank to order the results by relevancy.
+            search_vector = SearchVector('title', 'body')
+            search_query = SearchQuery(query)
             results = Post.objects.annotate(
-                search=SearchVector('title', 'body'),
-            ).filter(search=query)
+                search=search_vector,
+                rank=SearchRank(search_vector, search_query)
+            ).filter(search=search_query).order_by('-rank')
     return render(request,
                   'blog/post/search.html',
                   {'form': form,
